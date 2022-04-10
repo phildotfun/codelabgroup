@@ -465,14 +465,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29636f7db42d74064b9ce47a8819c05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  largeAsteroid: {fileID: 3649905851891681411, guid: 425e597c927584afba141134a076050a, type: 3}
-  mediumAsteroid: {fileID: 1972328120042686309, guid: 99d208fa5c7d34ef09fa91003feed8ae, type: 3}
-  smallAsteroid: {fileID: 8679716416808819269, guid: dc29929b43e914d26a0882a1c0b66a61, type: 3}
+  asteroidPrefab: {fileID: 3649905851891681411, guid: 425e597c927584afba141134a076050a, type: 3}
   spawnOne: {fileID: 728751719}
   spawnTwo: {fileID: 194157969}
   spawnThree: {fileID: 1440841576}
   spawnFour: {fileID: 1944401448}
-  asteroidTimer: 0.5
+  asteroidTimer: 1.5
 --- !u!4 &1676494321
 Transform:
   m_ObjectHideFlags: 0

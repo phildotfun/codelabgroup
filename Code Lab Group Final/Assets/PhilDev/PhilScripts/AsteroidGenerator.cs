@@ -5,9 +5,9 @@ using UnityEngine;
 public class AsteroidGenerator : MonoBehaviour
 {
     [Header("Asteroids")]
-    [SerializeField] GameObject largeAsteroid;
-    [SerializeField] GameObject mediumAsteroid;
-    [SerializeField] GameObject smallAsteroid;
+    [SerializeField] GameObject asteroidPrefab;
+
+    GameObject liveAsteroid;
 
     [Header("Spawner")]
     [SerializeField] GameObject spawnOne;
@@ -15,24 +15,15 @@ public class AsteroidGenerator : MonoBehaviour
     [SerializeField] GameObject spawnThree;
     [SerializeField] GameObject spawnFour;
 
+    Transform spawnerTrans;
+
+
     [Header("Asteroid Timer")]
     [SerializeField] float asteroidTimer = 2f;
     float elapsedTime;
 
-    private List<Vector2> spawnLocations = new List<Vector2>();
     private Quaternion newRotation;
-    Vector2 newPosition;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        spawnLocations.Add(spawnOne.transform.position);
-        spawnLocations.Add(spawnTwo.transform.position);
-        spawnLocations.Add(spawnThree.transform.position);
-        spawnLocations.Add(spawnFour.transform.position);
-    }
+    Vector3 newPosition;
 
     // Update is called once per frame
     void Update()
@@ -60,79 +51,60 @@ public class AsteroidGenerator : MonoBehaviour
         }
     }
 
-    //Set health for Asteroid
-    int SetAsteroidHealth()
-    {
-        int asteroidHealth = Random.Range(1,4);
-        return asteroidHealth;
-    }
-
     //create a random number used to determine
     //the spawner location and rotation
-    int RandomSpawnerProperty()
+    int RandomSpawnerPosition()
     {
-        int randSpawnNum = Random.Range(0, 4);
+        int randSpawnNum = Random.Range(1, 5);
         return randSpawnNum;
     }
 
-    float RandomRotation()
+    float RandomAngle()
     {
-        float randomRot = Random.Range(-10f, 10f);
+        float randomRot = Random.Range(-40f, 40f);
         return randomRot;
     }
 
-    //Generate random to set spawning point
-    Vector2 GenerateNewPosition(int randSpawnNum)
+    float randPosition()
     {
-        return  newPosition = spawnLocations[randSpawnNum];
+        float randomPos = Random.Range(-5f, 5f);
+        return randomPos;
     }
-
-    //set random rotation
-    Quaternion SetRandomRotation(int randSpawnNum)
-    {
-
-        if (randSpawnNum == 1)
-        {
-            newRotation = Quaternion.Euler(0, 0, spawnOne.transform.rotation.eulerAngles.z);
-        }
-        else if (randSpawnNum == 2)
-        {
-            newRotation = Quaternion.Euler(0, 0, spawnTwo.transform.rotation.eulerAngles.z);
-        }
-        else if (randSpawnNum == 3)
-        {
-            newRotation = Quaternion.Euler(0, 0, spawnThree.transform.rotation.eulerAngles.z);
-        }
-        else if (randSpawnNum == 4)
-        {
-            newRotation = Quaternion.Euler(0, 0, spawnFour.transform.rotation.eulerAngles.z);
-        }
-        return newRotation;
-    }
-
     //Generate asteroid based on SetAsteroidHealth randomizer
     void GenerateAsteroid()
     {
+        newPosition = new Vector3(0, 0, 0);
 
-        if (AsteroidChecker())
-    {
-            if (SetAsteroidHealth() == 3)
-            {
-                GameObject.Instantiate(largeAsteroid, GenerateNewPosition(RandomSpawnerProperty()), SetRandomRotation(RandomSpawnerProperty()));
-
-            }
-            else if (SetAsteroidHealth() == 2)
-            {
-                GameObject.Instantiate(mediumAsteroid, GenerateNewPosition(RandomSpawnerProperty()), SetRandomRotation(RandomSpawnerProperty()));
-            }
-            else if (SetAsteroidHealth() == 1)
-            {
-                GameObject.Instantiate(smallAsteroid, GenerateNewPosition(RandomSpawnerProperty()), SetRandomRotation(RandomSpawnerProperty()));
-            }
-            else
-            {
-            }
+        if (RandomSpawnerPosition() == 1)
+        {
+            spawnerTrans = spawnOne.transform;
+            newPosition = new Vector3(randPosition(), 0, 0);
         }
+        else if (RandomSpawnerPosition() == 2)
+        {
+            spawnerTrans = spawnTwo.transform;
+            newPosition = new Vector3(0, randPosition(), 0);
+        }
+        else if (RandomSpawnerPosition() == 3)
+        {
+            spawnerTrans = spawnThree.transform;
+            newPosition = new Vector3(randPosition(), 0, 0);
+
+        }
+        else if (RandomSpawnerPosition() == 4)
+        {
+            spawnerTrans = spawnFour.transform;
+            newPosition = new Vector3(0, randPosition(), 0);
+        }
+
+
+        newPosition += spawnerTrans.position;
+
+        float zAngle = spawnerTrans.rotation.eulerAngles.z + RandomAngle();
+
+        //instatiate new gameoject at spawner that has a new location and rotation
+        Instantiate(asteroidPrefab, newPosition, Quaternion.Euler(0f,0f,zAngle));
+
     }
 }
 
