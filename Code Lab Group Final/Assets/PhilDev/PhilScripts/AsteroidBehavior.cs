@@ -37,7 +37,6 @@ public class AsteroidBehavior : MonoBehaviour
     //when hit by player projectile, destory object
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject == projectile)
         {
             Destroy(gameObject);
         }

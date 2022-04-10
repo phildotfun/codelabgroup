@@ -93,19 +93,19 @@ public class AsteroidGenerator : MonoBehaviour
 
         if (randSpawnNum == 1)
         {
-            newRotation = Quaternion.Euler(0, 0, spawnOne.transform.rotation.eulerAngles.z + RandomRotation());
+            newRotation = Quaternion.Euler(0, 0, spawnOne.transform.rotation.eulerAngles.z);
         }
         else if (randSpawnNum == 2)
         {
-            newRotation = Quaternion.Euler(0, 0, spawnTwo.transform.rotation.eulerAngles.z + RandomRotation());
+            newRotation = Quaternion.Euler(0, 0, spawnTwo.transform.rotation.eulerAngles.z);
         }
         else if (randSpawnNum == 3)
         {
-            newRotation = Quaternion.Euler(0, 0, spawnThree.transform.rotation.eulerAngles.z + RandomRotation());
+            newRotation = Quaternion.Euler(0, 0, spawnThree.transform.rotation.eulerAngles.z);
         }
         else if (randSpawnNum == 4)
         {
-            newRotation = Quaternion.Euler(0, 0, spawnFour.transform.rotation.eulerAngles.z + RandomRotation());
+            newRotation = Quaternion.Euler(0, 0, spawnFour.transform.rotation.eulerAngles.z);
         }
         return newRotation;
     }
