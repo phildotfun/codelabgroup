@@ -44,20 +44,13 @@ public class AsteroidBehavior : MonoBehaviour
     {
         if (other.gameObject.tag == "Walls")
         {
-            Debug.Log("Has exited");
             Destroy(gameObject);
-
         }
     }
 
     //when hit by player projectile, destory asteroid
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        {
             Destroy(gameObject);
-        }
     }
-
-
 }
